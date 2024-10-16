@@ -27,16 +27,12 @@ db.connect((err) => {
     console.log("Connected to MYSQL as id: ", db.threadId); 
 }) 
 
-// < YOUR code goes down here 
-
+//   // Question 1
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 
-// Data is a file found in the Views folder 
-
 app.get('/data', (req,res) => {
-
-    // Retrieve data from database 
+    
     db.query('SELECT * FROM patients', (err, results) =>{
         if (err){
             console.error(err);
@@ -48,7 +44,57 @@ app.get('/data', (req,res) => {
     });
 });
 
-// <Your code goes up there
+ // Question 2
+ app.set('view engine', 'ejs');
+ app.set('views', __dirname + '/views');
+ 
+ app.get('/data', (req,res) => {
+     
+     db.query('SELECT * FROM providers', (err, results) =>{
+         if (err){
+             console.error(err);
+             res.status(500).send('Error Retrieving data')
+         }else {
+             //Display the records to the browser 
+             res.render('data', {results: results});
+         }
+     });
+ });
+
+ // Question 3
+ app.set('view engine', 'ejs');
+ app.set('views', __dirname + '/views');
+ 
+ app.get('/data', (req,res) => {
+     
+     db.query('SELECT * FROM patients', (err, results) =>{
+         if (err){
+             console.error(err);
+             res.status(500).send('Error Retrieving data')
+         }else {
+             //Display the records to the browser 
+             res.render('data', {results: results});
+         }
+     });
+ });
+
+// Question 4
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
+
+app.get('/data', (req,res) => {
+    
+    db.query('SELECT * FROM providers', (err, results) =>{
+        if (err){
+            console.error(err);
+            res.status(500).send('Error Retrieving data')
+        }else {
+            //Display the records to the browser 
+            res.render('data', {results: results});
+        }
+    });
+});
+
 
 // Start the server 
 app.listen(process.env.PORT, () => {
